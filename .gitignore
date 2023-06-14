@@ -1,0 +1,20 @@
+# ========= [ FOLDERS ] =========
+
+/obj
+/tests
+/testera
+/testerb
+
+# ========= [ FILES ] ===========
+
+*.o
+*.a
+*.md
+*.out
+gdb*
+minishell
+lib/.tests
+lib/tests
+lib/.git
+lib/*.md
+LICENSE
