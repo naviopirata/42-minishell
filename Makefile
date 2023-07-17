@@ -26,7 +26,8 @@ SOURCE			= $(addprefix $(PATH_SOURCES)/, $(FILE_SOURCES))
 FILE_HEADER		= $(PATH_INCLUDES)/minishell.h
 FILE_OBJECTS		= $(SOURCE:$(PATH_SOURCES)/%.c=$(PATH_OBJECTS)/%.o)
 
-FILE_SOURCES		= main.c
+FILE_SOURCES		= minishell.c
+FILE_SOURCES		+= signals_init.c abstree_init.c
 
 all: $(NAME)
 

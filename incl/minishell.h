@@ -15,7 +15,20 @@
 
 # include "../lib/libft.h"
 # include <readline/readline.h>
+# include <signal.h>
+# include <string.h>
 
-/* AUXILIAR METHODS */
+typedef struct s_tree 
+{
+	int value;
+	int count;
+	struct s_tree *left;
+	struct s_tree *right;
+} t_tree;
+
+/* AUXILIAR FUNCTIONS */
+/* SIGNAL FUNCTIONS */
+void	signals_init(void);
+void	abstree_init(void);
 
 #endif
