@@ -1,7 +1,7 @@
 # ========= [ FOLDERS ] =========
 
 /obj
-/tests
+# /tests
 /testera
 /testerb
 
