@@ -30,12 +30,48 @@ t_tree	*node_add(int value, t_tree *node)
 		}
 		return node_add(value, node->left);
 	}
-	if (!node->right)
+	else 
 	{
-		node->right = node_create(value);
-		return node->right;
+		if (!node->right)
+		{
+			node->right = node_create(value);
+			return node->right;
+		}
+		return node_add(value, node->right);
 	}
-	return node_add(value, node->right);
+}
+
+void	node_lst_asc(t_tree *node)
+{
+	if (node->left)
+		node_lst_asc(node->left);
+	ft_printf("%d x\t %d\n", node->count, node->value);
+	
+	if (node->right)
+		node_lst_asc(node->right);
+}
+
+void	node_lst_desc(t_tree *node) 
+{
+	if (node->right)
+		node_lst_desc(node->right);
+	ft_printf("%d x\t %d\n", node->count, node->value);
+
+	if (node->left)
+		node_lst_desc(node->left);
+	return ;
+}
+
+void	node_free(t_tree *node)
+{
+	if (!node)
+		return ;
+	if (node->left)
+		node_free(node->left);
+	if (node->right)
+		node_free(node->right);
+	free(node);
+	return ;
 }
 
 void	abstree_init(void)
