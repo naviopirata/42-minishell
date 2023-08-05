@@ -9,7 +9,7 @@
 
 *.o
 *.a
-*.md
+# *.md
 *.out
 gdb*
 minishell
