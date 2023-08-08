@@ -22,7 +22,3 @@
 - [ ] getcwd, chdir, stat, lstat, fstat, opendir, readdir, closedir, isatty, ttyname, ttyslot, ioctl,
 - [ ] getenv, tcsetattr, tcgetattr, tgetent, tgetflag,
 - [ ] tgetnum, tgetstr, tgoto, tputs
-
-v1.0 - algo puro
-v1.1 - checklist de casos (tests)
-v1.+ - feat

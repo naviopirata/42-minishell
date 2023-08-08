@@ -26,13 +26,13 @@ Aliases:
 
 ![[Minishell - tasks]]
 
-![[Minishell - subject]]
+![[ref_ Subject Minishell]]
 
 
-![[Minishell - allowed functions]]
+![[ref_ Allowed functions]]
 
 
-![[Minishell - shipping]]
+![[draw_ All-in-one]]
 
 
 ![[Minishell - Eval]]
