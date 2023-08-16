@@ -1,21 +1,27 @@
 #include "../incl/minishell.h"
+#include <stdlib.h>
 #include <unistd.h>
 #include <sys/wait.h>
 
-int	str_parse(char *lit)
+char	**str_parse(char *exp_input)
 {
 	char **trim;
-	trim = ft_split(lit, ' ');
+	trim = ft_split(exp_input, ' ');
 	ft_printf("\n1: %s\n", trim[0]);
 	ft_printf("2: %s\n", trim[1]);
-	return 0;
+	return trim;
 }
 
-void	cmd_run(void)
+void	cmd_run(char *exp_input)
 {
 	int pid;
-	char *arr[] = {"cat", "echoed.txt", NULL};
+	char **inputs;
+	char *arr[3];
 
+	inputs = str_parse(exp_input);
+	arr[0] = inputs[0];
+	arr[1] = inputs[1];
+	arr[2] = NULL;
 	pid = fork();
 	if (pid == 0)
 	{
@@ -27,25 +33,25 @@ void	cmd_run(void)
 		wait(NULL);
 		ft_printf("Parent scope!...\n", pid);
 	}
-	return ;
+	free(inputs);
 }
 
 int	main(void)
 {
-	char *str;
-	char *lit;
+	char *user_input;
+	char *exp_input;
 
-	lit = "echo hi";
-	// signals_init();
-	// abstree_init();
-	// while (1)
-	// {
-		ft_printf("Enter your command:");
-		str = readline("");
-		ft_printf("minishell$ %s", str);
-		if (ft_strnstr(str, lit, 7))
-			str_parse(lit);
-		cmd_run();
-	// }
+	exp_input = "cat echoed.txt";
+	while (1)
+	{
+		ft_printf("minishell$ ");
+		user_input = readline("");
+		if (ft_strnstr(user_input, exp_input, ft_strlen(exp_input)))
+		{
+			cmd_run(exp_input);
+			break ;
+		}
+		ft_printf("Error: Invalid command...\nTry: cat echoed.txt\n");
+	}
 	return (0);
 }
