@@ -3,6 +3,9 @@
 #include <unistd.h>
 #include <sys/wait.h>
 
+#define READ_END 0 
+#define WRITE_END 1
+
 char	**str_parse(char *exp_input)
 {
 	char **trim;
@@ -14,26 +17,43 @@ char	**str_parse(char *exp_input)
 
 void	cmd_run(char *exp_input)
 {
-	int pid;
+	int pid1;
+	int pid2;
 	char **inputs;
 	char *arr[3];
+	int pipedes[2];
 
 	inputs = str_parse(exp_input);
 	arr[0] = inputs[0];
 	arr[1] = inputs[1];
+	free(inputs);
 	arr[2] = NULL;
-	pid = fork();
-	if (pid == 0)
+	arr[0] = "cat";
+	arr[1] = "test.txt";
+	pipe(pipedes);
+	pid1 = fork();
+	if (pid1 == 0)
 	{
-		ft_printf("\nChild pid: %d\n", pid);
+		dup2(pipedes[WRITE_END], STDOUT_FILENO);
+		close(pipedes[READ_END]);
+		close(pipedes[WRITE_END]);
 		execve("/bin/cat", arr , NULL);
 	}
-	else
+	arr[0] = "grep";
+	arr[1] = "pirate";
+	pid2 = fork();
+	if (pid2 == 0)
 	{
-		wait(NULL);
-		ft_printf("Parent scope!...\n", pid);
+		dup2(pipedes[READ_END], STDIN_FILENO);
+		close(pipedes[READ_END]);
+		close(pipedes[WRITE_END]);
+		execve("/bin/grep", arr , NULL);
 	}
-	free(inputs);
+	close(pipedes[READ_END]);
+	close(pipedes[WRITE_END]);
+	waitpid(pid1, NULL, 0);
+	waitpid(pid2, NULL, 0);
+	ft_printf("Success!\n");
 }
 
 int	main(void)
@@ -41,7 +61,7 @@ int	main(void)
 	char *user_input;
 	char *exp_input;
 
-	exp_input = "cat echoed.txt";
+	exp_input = "cat test.txt | grep pirate";
 	while (1)
 	{
 		ft_printf("minishell$ ");
