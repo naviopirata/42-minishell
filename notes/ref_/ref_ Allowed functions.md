@@ -1,3 +1,7 @@
+---
+status: No status
+---
+
 ### Processes
 
 - [ ] open, close, read, write,
@@ -9,6 +13,8 @@
 - [ ] exit,
 - [ ] fork, pipe,
 - [ ] unlink, wait, waitpid
+
+
 
 ### Signals
 

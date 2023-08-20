@@ -1,3 +1,7 @@
+---
+status: No status
+---
+
 # Minishell - Solutions
 
 ![[draw_ v1 Mock]]

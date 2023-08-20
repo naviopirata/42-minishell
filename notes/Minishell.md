@@ -1,5 +1,6 @@
 ---
-Aliases: 
+Aliases:
+status: No status
 ---
 %%
 > Tag: [[42]] [[clang]]

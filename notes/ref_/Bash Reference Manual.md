@@ -1,3 +1,7 @@
+---
+status: No status
+---
+
 ## Bash Features
 
 This text is a brief description of the features that are present in the Bash shell (version 5.2, 19 September 2022). The Bash home page is [http://www.gnu.org/software/bash/](http://www.gnu.org/software/bash/).

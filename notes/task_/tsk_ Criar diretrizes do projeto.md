@@ -21,8 +21,8 @@ milestones:
 - Convenção de commits
 	-  [Conventional](https://www.conventionalcommits.org/en/v1.0.0/) e [Angular](https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#-commit-message-guidelines)
 - Critérios de aceites dos PR
-	- Compilar
-	- Sem leak
-	- Norma
+	- Compilar 
+	- Sem leak 
+	- Norma 
 	- Testes? [[tsk_ Alinhamentos]]
 
