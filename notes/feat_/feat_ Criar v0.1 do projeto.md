@@ -10,24 +10,14 @@ type:
 milestones:
 ---
 
-- [ ] feat_ Criar v001 do projeto
+- [ ] feat_ Criar v0.1 do projeto
 	- [ ] task_ Criar uma estrutura de dados
 	- [ ] task_ Criar parser para o comando Echo
 	- [ ] task_ Criar o executor que chame Echo e retorne
 
 
-```mermaid
-	flowchart TD
-	START -->
-	
-	ask[Type command] -->
-	read[cat echoed.txt] -->
-	split[Split cat echoed.txt] -->
-	forkwait[Fork pid & wait] -->
-	execve[Execute child] -->
-	free[Free mem] -->
-	
-	RETURN
+```
+cat echoed.txt > void.txt | sort < tail void.txt | grep pirate | cat void.txt
 ```
 
 
