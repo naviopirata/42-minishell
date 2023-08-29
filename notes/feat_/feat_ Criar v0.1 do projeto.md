@@ -34,39 +34,34 @@ milestones:
 ```mermaid
 	flowchart TD
 	readuser{User input?}
-	err_1{Error?}
-	c1(( ))
+	err{Error?}
 	c2(( ))
 	
 	
 	START -->
-	readuser -- yes --> err_1
+	readuser -- yes --> err
 	readuser -- no --> Read_Doc
 	
 	Read_Doc -->
+	err
+
+	err -- yes ------- RETURN
+	err -- no --> 
 	Make_AST -->
 	Tokenize -->
 	Execute ---
 	c2
-
-	err_1 -- yes ------- c1
-	err_1 -- no --> 
-	u_Make_AST -->
-	u_Tokenize -->
-	u_Execute ---
-	c2
-
 	
 	c2 -->
 	readuser
 	
-	c1 -->
 	RETURN
 ```
 
 ```mermaid
 	flowchart TD
 	hasOper{Has Operator?}
+	ispipe{Is pipe?}
 	c1(( ))
 	
 
@@ -74,7 +69,10 @@ milestones:
 	hasOper
 	
 
-	Exec_Operator ---
+	Execute_Pipe ---
+	c1
+	
+	Execute_Redirect ---
 	c1
 	
 	Execute_Once ---
@@ -88,7 +86,9 @@ milestones:
 	subgraph Execute_AST
 		hasOper -- yes -->
 			Select_Operator	-->
-			Exec_Operator 
+			Exec_Operator -->
+			ispipe -- yes --> Execute_Pipe
+			ispipe -- no --> Execute_Redirect
 
 		hasOper -- no -->
 			Execute_Once
@@ -114,7 +114,58 @@ milestones:
 
 ```mermaid
 	flowchart TD
+	c1(( ))
+	ischild{Is Child?}
+	isgrandchild{Is G child?}
+	c2(( ))
 
-	EXECUTE_OPERATOR -->
+	EXECUTE_PIPE -->
+	Fork -->
+	ischild -- yes --> Create_Pipedes
+	ischild -- no --- c1
+
+	Create_Pipedes -->
+	Fork_Child -->
+	isgrandchild -- yes --> Execute_Cmd_1
+	isgrandchild -- no --- c2
+
+	Execute_Cmd_1 ---
+	c2 
+
+	c2 -->
+	Wait_GChild -->
+	Execute_Cmd_2 ---
+	c1
+
+	c1 -->
+	Wait -->	
 	RETURN
+```
+
+```mermaid
+	flowchart TD
+	c1(( ))
+	c2(( ))
+	checkappend{Append?}
+	ischild{Is Child?}
+
+	EXECUTE_REDIRECT -->
+	Fork -->
+	ischild -- yes --> checkappend
+	ischild -- no --- c1
+
+	checkappend -- yes --> Open_FD_Append --- c2
+	checkappend -- no --> Open_FD_Write_Only --- c2
+
+	c2 -->
+	Close_Extra_FD -->
+	Dup -->
+	Execute ---
+	c1
+	
+	c1 -->
+	Wait -->
+
+	RETURN
+
 ```
