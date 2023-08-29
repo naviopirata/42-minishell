@@ -24,3 +24,43 @@ milestones:
 	unload_mem -->
 	Return
 ```
+
+```mermaid
+	flowchart TD
+	pipesCount["Pipes count"]
+	envUser["Env User"]
+	envSys["Env System"]
+
+	START -->
+	Signal -->
+	Lexer -->
+	Parser -->
+	Expander -->
+	Executor <-->
+	Return
+
+
+	subgraph Lexer
+		direction LR
+		Command -->
+		Order -->
+		pipesCount
+	end
+
+	subgraph Parser
+		direction LR
+		quote[Quotes] -->
+		backslash[Backslash]		
+	end
+
+	subgraph Expander
+		direction LR
+		envUser -->
+		envSys
+	end
+
+	subgraph Executor
+		direction LR
+		Exec
+	end
+```

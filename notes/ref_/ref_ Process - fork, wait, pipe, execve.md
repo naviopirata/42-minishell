@@ -25,6 +25,7 @@
 
 - “we’ll see later that the use of wait() is usually desirable, and is often employed within a handler for the SIGCHLD signal, which the kernel generates for a parent process when one of its children terminates.” (Kerrisk, 2018, p. 514)
 
+![[Pasted image 20230820220458.png]]
 ## “24.2 Creating a New Process: fork()” (Kerrisk, 2018, p. 515)
 
 - “The key point to understanding fork() is to realize that after it has completed its work, two processes exist, and, in each process, execution continues from the point where fork() returns.” (Kerrisk, 2018, p. 516)
@@ -43,7 +44,10 @@
 
 - “if the child updates the file offset, this change is visible through the corresponding descriptor in the parent.” (Kerrisk, 2018, p. 518)
 
+![[Pasted image 20230820220649.png]]
 ## “24.2.2 Memory Semantics of fork()” (Kerrisk, 2018, p. 520)
+
+![[Pasted image 20230820220719.png]] 
 
 - “Controlling a process’s memory footprint” (Kerrisk, 2018, p. 521)
 
@@ -105,6 +109,7 @@
 
 - “On error, wait() returns –1. One possible error is that the calling process has no (previously unwaited-for) children, which is indicated by the errno value ECHILD.” (Kerrisk, 2018, p. 542)
 
+
 ## “26.1.2 The waitpid() System Call” (Kerrisk, 2018, p. 544)
 
 - “The wait() system call has a number of limitations, which waitpid() was designed to address:” (Kerrisk, 2018, p. 544)
@@ -146,6 +151,8 @@
 - “z The child was resumed by a SIGCONT signal, and waitpid() was called with the WCONTINUED flag.” (Kerrisk, 2018, p. 545)
 
 - “When applied to a status value returned by wait() or waitpid(), only one of the macros in the list below will return true.” (Kerrisk, 2018, p. 546)
+
+![[Pasted image 20230820221242.png]]
 
 - “WIFEXITED(status)” (Kerrisk, 2018, p. 546)
 
@@ -239,6 +246,8 @@
 
 - “we can use errno to determine the cause.” (Kerrisk, 2018, p. 564)
 
+![[Pasted image 20230820221804.png]]
+
 ## “27.2.1 The PATH Environment Variable” (Kerrisk, 2018, p. 568)
 
 - “The execvp() and execlp() functions allow us to specify just the name of the file to be executed.” (Kerrisk, 2018, p. 568)
@@ -264,6 +273,8 @@
 - “Execution of interpreter scripts” (Kerrisk, 2018, p. 573)
 
 - “Since a script doesn’t contain binary machine code, when execve() is used to run the script” (Kerrisk, 2018, p. 573)
+
+![[Pasted image 20230820222001.png]]
 
 ## “27.4 File Descriptors and exec()” (Kerrisk, 2018, p. 575)
 
@@ -342,6 +353,8 @@
 - “z In the child, SIGINT and SIGQUIT should be treated as they would be if the calling process did a fork() and exec(); that is, the disposition of handled signals is reset to the default, and the disposition of other signals remains unchanged.” (Kerrisk, 2018, p. 584)
 
 - “While the command is being executed, typing Control-C or Control-\ will kill only the child of system(),” (Kerrisk, 2018, p. 584)
+
+![[Pasted image 20230820224408.png]]
 
 - “An improved system() implementation” (Kerrisk, 2018, p. 585)
 

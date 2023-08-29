@@ -12,18 +12,41 @@ milestones:
 ```mermaid
 	flowchart TD
 	c1(( ))
+	Wait["Wait pid1\n Wait pid2"]
 
 	Start -->
-	Fork --- c1
-	Fork --> Child
+	Read["Read user input"] -->
+	Fork
 
-	Child ---
-	c1 -->
 	Wait -->
 	Return
+	subgraph Parent
+		Fork --- c1
+		Fork --> Child1
+	
+		Child1 --->
+		Pipe -->
+		Child2 ---
+		c1 -->
+		Wait
+	end
+	
 
-	subgraph Child
-		Exec
+	subgraph Child1
+		Execcat["Exec cat test.txt"]
+	end
+
+	subgraph Child2
+		Execgrep["grep pirate"]
+	end
+
+	subgraph Pipe
+		dup2child1["Dup2 Child1"] -->
+		pipew["Pipe Write"] -->
+		stdout["STDOUT"] -->
+		dup2child2["Dup2 Child2"] -->
+		piper["Pipe Read"] -->
+		stdin["STDIN"]
 	end
 ```
 
