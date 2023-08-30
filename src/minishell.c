@@ -1,3 +1,4 @@
+
 #include "../incl/minishell.h"
 #include <stdlib.h>
 #include <unistd.h>
@@ -73,5 +74,5 @@ int	main(void)
 		}
 		ft_printf("Error: Invalid command...\nTry: cat echoed.txt\n");
 	}
-	return (0);
-}
+
+
