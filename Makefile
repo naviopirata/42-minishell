@@ -8,7 +8,7 @@ DEBUG			= gdb -q -tui
 MEMCHECK		= valgrind
 
 FLAG_C			= -g -Wall -Wextra -Werror
-FLAG_LEAK		= --leak-check=full --show-leak-kinds=all --track-origins=yes
+FLAG_LEAK		= --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=readline.supp
 FLAG_LEAK		+= -s
 
 PATH_INCLUDES		= incl
