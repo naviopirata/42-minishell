@@ -74,5 +74,5 @@ int	main(void)
 		}
 		ft_printf("Error: Invalid command...\nTry: cat echoed.txt\n");
 	}
-
+}
 
