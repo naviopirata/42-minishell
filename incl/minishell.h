@@ -18,6 +18,13 @@
 # include <readline/readline.h>
 # include <signal.h>
 # include <string.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/wait.h>
 
+#define READ_END 0 
+#define WRITE_END 1
 
+char	**str_parse(char *exp_input);
+int	cmd_run(char *root, char *input);
 #endif

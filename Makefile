@@ -26,7 +26,7 @@ SOURCE			= $(addprefix $(PATH_SOURCES)/, $(FILE_SOURCES))
 FILE_HEADER		= $(PATH_INCLUDES)/minishell.h
 FILE_OBJECTS		= $(SOURCE:$(PATH_SOURCES)/%.c=$(PATH_OBJECTS)/%.o)
 
-FILE_SOURCES		= minishell.c
+FILE_SOURCES		= minishell.c cmd_run.c
 
 all: $(NAME)
 
