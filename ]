@@ -1,0 +1,107 @@
+#include "../incl/minishell.h"
+#include <unistd.h>
+
+static void close_fd(int pipes[])
+{
+	close(pipes[READ_END]);
+	close(pipes[WRITE_END]);
+	return ;
+}
+
+static void	cmd_exec(int pipes[], char *root, char *cmd[], int mode)
+{
+	if (mode == WRITE_END)
+		dup2(pipes[WRITE_END], STDOUT_FILENO);
+	else
+		dup2(pipes[READ_END], STDIN_FILENO);
+	close_fd(pipes);
+	execve(root, cmd, NULL);
+}
+
+int	pipe_exec(void)
+{
+	int	pid1;
+	int	pid2;
+	int	pipes[2];
+
+	pipe(pipes);
+	pid1 = fork();
+	if (pid1 == -1)
+		return (-1);
+	if (pid1 == 0)
+	{
+		char	*cat[3];
+		cat[0] = "cat";
+		cat[1] = "echoed.txt";
+		cat[2] = NULL;
+		cmd_exec(pipes, "/bin/cat", cat, WRITE_END);
+	}
+
+	pid2 = fork();
+	if (pid2 == -1)
+		return (-1);
+	if (pid2 == 0)
+	{
+		char	*sort[2];
+		sort[0] = "sort";
+		sort[1] = NULL;
+		cmd_exec(pipes, "/bin/sort", sort, READ_END);
+	}
+	// pid3 = fork();
+	// if (pid3 == -1)
+	// 	return (-1);
+	// if (pid3 == 0)
+	// {
+		// char	*tail[4];
+		// tail[0] = "tail";
+		// tail[1] = "-n";
+		// tail[2] = "3";
+		// tail[3] = NULL;
+	// 	dup2(pipez[READ_END], STDIN_FILENO);
+	// 	close(pipez[READ_END]);
+	// 	close(pipez[WRITE_END]);
+	// 	execve("/bin/tail", tail, NULL);
+	// }
+	// close(pipez[READ_END]);
+	// close(pipez[WRITE_END]);
+	// waitpid(pid3, NULL, 0);
+
+	close_fd(pipes);
+	waitpid(pid1, NULL, 0);
+	waitpid(pid2, NULL, 0);
+
+	return (1);
+}
+
+int cmd_run_pipe(int cmdid)
+{
+	// char	*cat[3];
+	// char	*sort[2];
+	// char	*tail[4];
+	// char	*grep[3];
+
+	// cat[0] = "cat";
+	// cat[1] = "echoed.txt";
+	// cat[2] = NULL;
+	//
+	// sort[0] = "sort";
+	// sort[1] = NULL;
+	
+	// tail[0] = "tail";
+	// tail[1] = "-n";
+	// tail[2] = "3";
+	// tail[3] = NULL;
+	//
+	// grep[0] = "grep";
+	// grep[1] = "pirate";
+	// grep[2] = NULL;
+	if (cmdid == 0)
+		pipe_exec();
+	// else if (cmdid == 1)
+	// 	pipe_exec(sort);
+	// else if (cmdid == 2)
+	// 	pipe_exec(tail);
+	// else if (cmdid == 3)
+	// 	pipe_exec(grep);
+	return (0);
+}

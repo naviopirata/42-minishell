@@ -18,13 +18,21 @@
 # include <readline/readline.h>
 # include <signal.h>
 # include <string.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/wait.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <sys/wait.h>
 
-#define READ_END 0 
-#define WRITE_END 1
+# define READ_END 0 
+# define WRITE_END 1
+# define OPER_APPEND 1
+# define OPER_WRITE 2
+# define OPER_PIPE 3
 
 char	**str_parse(char *exp_input);
+
+// EXECUTION FUNCTIONS
 int	cmd_run(char *root, char *input);
-#endif
+int	cmd_run_pipe(int cmdid);
+int	cmd_run_redirect(void);
+
+# endif
