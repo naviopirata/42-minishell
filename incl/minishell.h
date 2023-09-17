@@ -28,11 +28,21 @@
 # define OPER_WRITE 2
 # define OPER_PIPE 3
 
+typedef struct s_box {
+	int	pipeone[2];
+	int	pipetwo[2];
+	char	**cat;
+	char	**sort;
+	char	**tail;
+} t_box ;
+
 char	**str_parse(char *exp_input);
 
 // EXECUTION FUNCTIONS
 int	cmd_run(char *root, char *input);
 int	cmd_run_pipe(int cmdid);
 int	cmd_run_redirect(void);
+
+t_box	*box_create();
 
 # endif
