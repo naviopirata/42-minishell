@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ddiniz <ddiniz@student.42sp.org.br>        +#+  +:+       +#+         #
+#    By: bede-car <bede-car@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/15 23:21:37 by ddiniz            #+#    #+#              #
-#    Updated: 2022/04/29 17:44:40 by ddiniz           ###   ########.fr        #
+#    Updated: 2023/09/24 17:47:31 by bede-car         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ NAME	= libft.a
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	ar -rc $(NAME) $^
+	ar -rcs $(NAME) $^
 
 %.o: %.c %.h
 	$(CC) $(CFLAGS) -c $< -o $@

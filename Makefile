@@ -1,37 +1,37 @@
-LINKER			= gcc
-COMPILER		= $(LINKER) -c
+LINKER				= gcc
+#LINKER				= cc
+#LINKER				= clang
+COMPILER			= $(LINKER) -c
 
-REMOVE			= rm
+REMOVE				= rm
 REMOVE_FORCE		= $(REMOVE) -rf
-MAKE_DIR		= mkdir -p
-DEBUG			= gdb -q -tui
-MEMCHECK		= valgrind
+MAKE_DIR			= mkdir -p
+DEBUG				= gdb -q -tui
+MEMCHECK			= valgrind
 
-FLAG_C			= -g -Wall -Wextra -Werror
-FLAG_LEAK		= --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=readline.supp
-FLAG_LEAK		+= -s
+FLAG_C				= -g -Wall -Wextra -Werror
+FLAG_LEAK			= --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=readline.supp
+FLAG_LEAK			+= -s
 
-PATH_INCLUDES		= incl
-PATH_SOURCES		= src
+LIBFT				= $(PATH_LIBFT)/libft.a
+INCLUDES			= -I $(PATH_INCLUDES) -I $(PATH_LIBFT)
+
+PATH_TESTS			= tests
+PATH_LIBFT			= lib
 PATH_OBJECTS		= obj
-PATH_LIBRARIES		= lib
-PATH_TESTS		= tests
-PATH_LIBFT		= $(PATH_LIBRARIES)
+PATH_INCLUDES		= incl
+VPATH				= $(shell find src type -depth)
 
-LIBFT			= $(PATH_LIBFT)/libft.a
-INCLUDES		= -I$(PATH_INCLUDES) -I$(PATH_LIBFT)
+NAME				= minishell
+FILE_HEADER			= $(PATH_INCLUDES)/minishell.h
+FILE_OBJECTS		= $(patsubst %.c,$(PATH_OBJECTS)/%.o, $(FILE_SOURCES))
 
-NAME			= minishell
-SOURCE			= $(addprefix $(PATH_SOURCES)/, $(FILE_SOURCES))
-FILE_HEADER		= $(PATH_INCLUDES)/minishell.h
-FILE_OBJECTS		= $(SOURCE:$(PATH_SOURCES)/%.c=$(PATH_OBJECTS)/%.o)
-
-FILE_SOURCES		= minishell.c cmd_run.c
+FILE_SOURCES		= redirect.c minishell.c cmd_run.c
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(PATH_OBJECTS) $(FILE_OBJECTS) $(FILE_HEADER)
-	$(LINKER) $(FLAG_C) $(FILE_OBJECTS) $(LIBFT) -lreadline -o $@
+$(NAME): $(PATH_OBJECTS) $(FILE_OBJECTS) $(LIBFT) $(FILE_HEADER)
+	$(LINKER) $(FILE_OBJECTS) $(LIBFT) $(FLAG_C) -o $@ $(INCLUDES) -lreadline -o $@
 
 $(LIBFT):
 	@$(MAKE) -C $(PATH_LIBFT) all
@@ -39,8 +39,8 @@ $(LIBFT):
 $(PATH_OBJECTS):
 	$(MAKE_DIR) $(PATH_OBJECTS)
 
-$(PATH_OBJECTS)/%.o: $(PATH_SOURCES)/%.c $(FILE_HEADER)
-	$(COMPILER) $(FLAG_C) $(INCLUDES) $< -o $@
+$(PATH_OBJECTS)/%.o: %.c 
+	$(COMPILER) $< -c $(FLAG_C) $(INCLUDES) -o $@
 
 clean:
 	$(REMOVE_FORCE) $(PATH_OBJECTS)
