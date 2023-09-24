@@ -24,7 +24,7 @@ VPATH				= $(shell find src type -depth)
 
 NAME				= minishell
 FILE_HEADER			= $(PATH_INCLUDES)/minishell.h
-FILE_OBJECTS		=	$(patsubst %.c,$(PATH_OBJECTS)/%.o, $(FILE_SOURCES))
+FILE_OBJECTS		= $(patsubst %.c,$(PATH_OBJECTS)/%.o, $(FILE_SOURCES))
 
 FILE_SOURCES		= redirect.c minishell.c cmd_run.c
 
