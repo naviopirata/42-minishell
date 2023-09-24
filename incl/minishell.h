@@ -6,7 +6,7 @@
 /*   By: bede-car <bede-car@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 20:58:57 by ddiniz            #+#    #+#             */
-/*   Updated: 2023/09/06 12:27:03 by bede-car         ###   ########.fr       */
+/*   Updated: 2023/09/24 17:41:27 by bede-car         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 // allowed libraries
 # include "../lib/libft.h"
 # include <readline/readline.h>
+# include <readline/history.h>
 # include <signal.h>
 # include <string.h>
 #include <stdlib.h>
