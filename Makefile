@@ -20,13 +20,16 @@ PATH_TESTS			= tests
 PATH_LIBFT			= lib
 PATH_OBJECTS		= obj
 PATH_INCLUDES		= incl
-VPATH				= $(shell find src type -depth)
+VPATH				= @$(shell find src type -depth)
 
 NAME				= minishell
-FILE_HEADER			= $(PATH_INCLUDES)/minishell.h
+FILE_HEADER			= $(PATH_INCLUDES)/defines.h \
+					  $(PATH_INCLUDES)/minishell.h \
+					  $(PATH_INCLUDES)/prototypes.h
 FILE_OBJECTS		= $(patsubst %.c,$(PATH_OBJECTS)/%.o, $(FILE_SOURCES))
 
-FILE_SOURCES		= redirect.c minishell.c cmd_run.c
+FILE_SOURCES		= main.c memory.c prompt.c \
+#redirect.c minishell.c cmd_run.c #demo-v0.1
 
 all: $(NAME)
 
